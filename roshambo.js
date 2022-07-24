@@ -33,3 +33,7 @@ function playRound(playerSelection, computerSelection){
         return "ERROR!";
     }
 }
+
+let playerSelection = prompt("Rock, Paper, or Scissors?", "Rock");
+let computerSelection = getComputerChoice();
+console.log(playRound(playerSelection,computerSelection));
