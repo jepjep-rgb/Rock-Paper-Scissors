@@ -20,13 +20,13 @@ function playRound(playerSelection, computerSelection){
         return 0;
     } else if (ps === 'rock' && cs === 'paper'){
         console.log(`You lose! ${cs} beats ${ps}`);
-        return 0;
+        return -1;
     } else if (ps === 'paper' && cs === 'scissors'){
         console.log(`You lose! ${cs} beats ${ps}`);
-        return 0;
+        return -1;
     } else if (ps === 'scissors' && cs === 'rock'){
         console.log(`You lose! ${cs} beats ${ps}`);
-        return 0;
+        return -1;
     } else if (ps === 'rock' && cs === 'scissors'){
         console.log(`You won! ${ps} beats ${cs}`);
         return 1;
@@ -51,7 +51,15 @@ function game() {
         computerSelection = getComputerChoice();
         score += playRound(playerSelection,computerSelection);
     }
-    console.log(`Score: ${score}`);
+    if (score === 0){
+        console.log("Both player and computer tied!");
+    } else if (score > 0){
+        console.log("Player won!");
+    } else if (score < 0) {
+        console.log("Computer won!");
+    } else {
+        console.log("Error!");
+    }
 }
 
 game();
