@@ -16,21 +16,29 @@ function playRound(playerSelection, computerSelection){
     let cs = computerSelection.toLowerCase();
 
     if (ps === cs){
-        return `You tied! Both played ${ps}`;
+        console.log(`You tied! Both played ${ps}`);
+        return 0;
     } else if (ps === 'rock' && cs === 'paper'){
-        return `You lose! ${cs} beats ${ps}`;
+        console.log(`You lose! ${cs} beats ${ps}`);
+        return 0;
     } else if (ps === 'paper' && cs === 'scissors'){
-        return `You lose! ${cs} beats ${ps}`;
+        console.log(`You lose! ${cs} beats ${ps}`);
+        return 0;
     } else if (ps === 'scissors' && cs === 'rock'){
-        return `You lose! ${cs} beats ${ps}`;
+        console.log(`You lose! ${cs} beats ${ps}`);
+        return 0;
     } else if (ps === 'rock' && cs === 'scissors'){
-        return `You won! ${ps} beats ${cs}`;
+        console.log(`You won! ${ps} beats ${cs}`);
+        return 1;
     } else if (ps === 'paper' && cs === 'rock'){
-        return `You won! ${ps} beats ${cs}`;
+        console.log(`You won! ${ps} beats ${cs}`);
+        return 1;
     } else if (ps === 'scissors' && cs === 'paper'){
-        return `You won! ${ps} beats ${cs}`;
+        console.log(`You won! ${ps} beats ${cs}`);
+        return 1;
     } else {
-        return "ERROR!";
+        console.log("ERROR!");
+        return 0;
     }
 }
 
