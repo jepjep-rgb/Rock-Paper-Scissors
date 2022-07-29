@@ -1,6 +1,9 @@
 const rockButton = document.querySelector('.btn-rock');
 const paperButton = document.querySelector('.btn-paper');
 const scissorsButton = document.querySelector('.btn-scissors');
+const div = document.querySelector('.results');
+const para = document.createElement('p');
+para.textContent = '';
 
 function getComputerChoice() {
     let compChoice = Math.floor(Math.random()*3);
@@ -20,28 +23,28 @@ function playRound(playerSelection, computerSelection){
     let cs = computerSelection.toLowerCase();
 
     if (ps === cs){
-        console.log(`You tied! Both played ${ps}`);
+        para.textContent = `You tied! Both played ${ps}`;
         return 0;
     } else if (ps === 'rock' && cs === 'paper'){
-        console.log(`You lose! ${cs} beats ${ps}`);
+        para.textContent = `You lose! ${cs} beats ${ps}`;
         return -1;
     } else if (ps === 'paper' && cs === 'scissors'){
-        console.log(`You lose! ${cs} beats ${ps}`);
+        para.textContent = `You lose! ${cs} beats ${ps}`;
         return -1;
     } else if (ps === 'scissors' && cs === 'rock'){
-        console.log(`You lose! ${cs} beats ${ps}`);
+        para.textContent = `You lose! ${cs} beats ${ps}`;
         return -1;
     } else if (ps === 'rock' && cs === 'scissors'){
-        console.log(`You won! ${ps} beats ${cs}`);
+        para.textContent = `You won! ${ps} beats ${cs}`;
         return 1;
     } else if (ps === 'paper' && cs === 'rock'){
-        console.log(`You won! ${ps} beats ${cs}`);
+        para.textContent = `You won! ${ps} beats ${cs}`;
         return 1;
     } else if (ps === 'scissors' && cs === 'paper'){
-        console.log(`You won! ${ps} beats ${cs}`);
+        para.textContent = `You won! ${ps} beats ${cs}`;
         return 1;
     } else {
-        console.log("ERROR!");
+        para.textContent = "ERROR!";
         return 0;
     }
 }
@@ -78,4 +81,6 @@ scissorsButton.addEventListener('click', () => {
     let computerSelection = getComputerChoice();
     playRound('Scissors', computerSelection);
 });
+
+div.appendChild(para);
 //game();
