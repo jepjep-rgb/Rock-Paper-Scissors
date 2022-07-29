@@ -50,37 +50,32 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game() {
-    let playerSelection;
-    let computerSelection;
-    let score = 0;
-    for (i = 0; i < 5; i++){
-        playerSelection = prompt("Rock, Paper, or Scissors?", "Rock");
-        computerSelection = getComputerChoice();
-        score += playRound(playerSelection,computerSelection);
-    }
-    if (score === 0){
-        console.log("Both player and computer tied!");
-    } else if (score > 0){
-        console.log("Player won!");
-    } else if (score < 0) {
-        console.log("Computer won!");
-    } else {
-        console.log("Error!");
-    }
+    let generalScore = 0;
+    let playerScore = 0;
+    let compScore = 0;
+    rockButton.addEventListener('click', () => {
+        let computerSelection = getComputerChoice();
+        generalScore = playRound('Rock', computerSelection);
+        if (generalScore === 1) playerScore++;
+        else if (generalScore === -1) compScore++;
+        console.log(`ps${playerScore} cs ${compScore}`);
+    });
+    paperButton.addEventListener('click', () => {
+        let computerSelection = getComputerChoice();
+        generalScore = playRound('Paper', computerSelection);
+        if (generalScore === 1) playerScore++;
+        else if (generalScore === -1) compScore++;
+        console.log(`ps${playerScore} cs ${compScore}`);
+    });
+    scissorsButton.addEventListener('click', () => {
+        let computerSelection = getComputerChoice();
+        generalScore = playRound('Scissors', computerSelection);
+        if (generalScore === 1) playerScore++;
+        else if (generalScore === -1) compScore++;
+        console.log(`ps${playerScore} cs ${compScore}`);
+    });
+
+    div.appendChild(para);
 }
 
-rockButton.addEventListener('click', () => {
-    let computerSelection = getComputerChoice();
-    playRound('Rock', computerSelection);
-});
-paperButton.addEventListener('click', () => {
-    let computerSelection = getComputerChoice();
-    playRound('Paper', computerSelection);
-});
-scissorsButton.addEventListener('click', () => {
-    let computerSelection = getComputerChoice();
-    playRound('Scissors', computerSelection);
-});
-
-div.appendChild(para);
-//game();
+game();
