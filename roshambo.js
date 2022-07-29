@@ -1,6 +1,8 @@
+const btnContainer = document.querySelector('.btn-container');
 const rockButton = document.querySelector('.btn-rock');
 const paperButton = document.querySelector('.btn-paper');
 const scissorsButton = document.querySelector('.btn-scissors');
+const resetButton = document.createElement('button');
 
 const div = document.querySelector('.results');
 const para = document.createElement('p');
@@ -10,7 +12,8 @@ const compScore = document.createElement('p');
 playerScore.classList.add('playerScore');
 compScore.classList.add('compScore')
 para.classList.add('results');
-
+resetButton.classList.add('reset');
+resetButton.textContent = "Reset";
 
 function getComputerChoice() {
     let compChoice = Math.floor(Math.random()*3);
@@ -67,14 +70,41 @@ function scoringSystem(score) {
     } else if (score[2] >= 5) {
         para.textContent = "Computer wins!";
     }
-
+    
     playerScore.textContent = `Player Score: ${score[1]}`;
     compScore.textContent = `Computer Score: ${score[2]}`;
 
     div.appendChild(playerScore);
     div.appendChild(compScore);
     div.appendChild(para);
+
+    endGame(score);
+
     return score;
+}
+
+function endGame(score) {
+    if (score[1] >= 5 || score[2] >= 5){
+        btnContainer.removeChild(rockButton);
+        btnContainer.removeChild(paperButton);
+        btnContainer.removeChild(scissorsButton);
+        btnContainer.appendChild(resetButton);
+    } else return;
+}
+
+function resetGame(score) {
+    btnContainer.removeChild(resetButton);
+    btnContainer.appendChild(rockButton);
+    btnContainer.appendChild(paperButton);
+    btnContainer.appendChild(scissorsButton);
+
+    playerScore.textContent = `Player Score: ${score[1]}`;
+    compScore.textContent = `Computer Score: ${score[2]}`;
+    para.textContent = ``;
+
+    div.appendChild(playerScore);
+    div.appendChild(compScore);
+    div.appendChild(para);
 }
 
 function game() {
@@ -94,6 +124,10 @@ function game() {
         let computerSelection = getComputerChoice();
         generalScore[0] = playRound('Scissors', computerSelection);
         scoringSystem(generalScore);
+    });
+    resetButton.addEventListener('click', () => {
+        generalScore = [0,0,0];
+        resetGame(generalScore);
     });
 }
 
