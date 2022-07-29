@@ -1,9 +1,16 @@
 const rockButton = document.querySelector('.btn-rock');
 const paperButton = document.querySelector('.btn-paper');
 const scissorsButton = document.querySelector('.btn-scissors');
+
 const div = document.querySelector('.results');
 const para = document.createElement('p');
-para.textContent = '';
+const playerScore = document.createElement('p');
+const compScore = document.createElement('p');
+
+playerScore.classList.add('playerScore');
+compScore.classList.add('compScore')
+para.classList.add('results');
+
 
 function getComputerChoice() {
     let compChoice = Math.floor(Math.random()*3);
@@ -49,33 +56,45 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+function scoringSystem(score) {
+    if (score[1] < 5 && score[2] < 5){
+        if (score[0] === 1) score[1]++;
+        else if (score[0] === -1) score[2]++;
+    }
+    
+    if (score[1] >= 5){
+        para.textContent = "Player wins!";
+    } else if (score[2] >= 5) {
+        para.textContent = "Computer wins!";
+    }
+
+    playerScore.textContent = `Player Score: ${score[1]}`;
+    compScore.textContent = `Computer Score: ${score[2]}`;
+
+    div.appendChild(playerScore);
+    div.appendChild(compScore);
+    div.appendChild(para);
+    return score;
+}
+
 function game() {
-    let generalScore = 0;
-    let playerScore = 0;
-    let compScore = 0;
+    // generalScore = [returnVal, playerVal, compVal]
+    let generalScore = [0,0,0];
     rockButton.addEventListener('click', () => {
         let computerSelection = getComputerChoice();
-        generalScore = playRound('Rock', computerSelection);
-        if (generalScore === 1) playerScore++;
-        else if (generalScore === -1) compScore++;
-        console.log(`ps${playerScore} cs ${compScore}`);
+        generalScore[0] = playRound('Rock', computerSelection);
+        scoringSystem(generalScore);
     });
     paperButton.addEventListener('click', () => {
         let computerSelection = getComputerChoice();
-        generalScore = playRound('Paper', computerSelection);
-        if (generalScore === 1) playerScore++;
-        else if (generalScore === -1) compScore++;
-        console.log(`ps${playerScore} cs ${compScore}`);
+        generalScore[0] = playRound('Paper', computerSelection);
+        scoringSystem(generalScore);
     });
     scissorsButton.addEventListener('click', () => {
         let computerSelection = getComputerChoice();
-        generalScore = playRound('Scissors', computerSelection);
-        if (generalScore === 1) playerScore++;
-        else if (generalScore === -1) compScore++;
-        console.log(`ps${playerScore} cs ${compScore}`);
+        generalScore[0] = playRound('Scissors', computerSelection);
+        scoringSystem(generalScore);
     });
-
-    div.appendChild(para);
 }
 
 game();
