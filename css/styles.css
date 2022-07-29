@@ -65,10 +65,14 @@ button:hover {
     border-color: #66FCF1;
 }
 
+button.reset {
+    width: 100%;
+    font-size: 40px;
+}
+
 p {
     color: #C5C6C7;
     font-family: "Heebo", sans-serif;
     font-family: 'Roboto', sans-serif;
     font-size: 50px;
-    border: 2px red solid;
 }
